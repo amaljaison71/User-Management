@@ -47,7 +47,12 @@ const AddUser = (props) => {
     if (+enteredAge < 1) {
       return;
     }
-    console.log(enteredUsername, enteredAge);
+
+    /**
+     * call the addUserHandler() on the app.js component and update the userslist state
+     * reference to the addUserHandler() on the app.js component is passed as an argument(onAddUser) to this component
+     */
+    props.onAddUser(enteredUsername, enteredAge);
     setEnteredUsername("");
     setEnteredAge("");
   };
