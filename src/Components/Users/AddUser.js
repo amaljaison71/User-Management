@@ -33,18 +33,42 @@ const AddUser = (props) => {
    * This method adds new user to existing list of users
    * @param {*} event
    */
-   const addUserHandler = (event) => {
+  const addUserHandler = (event) => {
     event.preventDefault(); // prevents the form's default submit behaviour and hence prevent reoading the page
+    /**
+     * Checks if the entered username or age is empty, then do nothing and return
+     */
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+    /**
+     * Checks if the entered age is a valid age, then continues the execution else do nothing and return
+     */
+    if (+enteredAge < 1) {
+      return;
+    }
     console.log(enteredUsername, enteredAge);
+    setEnteredUsername("");
+    setEnteredAge("");
   };
 
   return (
     <Card className={styles.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
-        <input id="username" type="text" onChange={usernameChangeHandler} />
+        <input
+          id="username"
+          type="text"
+          value={enteredUsername}
+          onChange={usernameChangeHandler}
+        />
         <label htmlFor="age">Age (Years)</label>
-        <input id="age" type="number" onChange={ageChangeHandler} />
+        <input
+          id="age"
+          type="number"
+          value={enteredAge}
+          onChange={ageChangeHandler}
+        />
         <Button type="submit">Add User</Button>
       </form>
     </Card>
